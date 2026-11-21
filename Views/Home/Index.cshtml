@@ -1,0 +1,28 @@
+﻿@{
+    // Define el título de la página que se mostrará en la pestaña del navegador
+    ViewData["Title"] = "Panel Principal";
+}
+
+@* Contenedor principal con margen superior utilizando clases de Bootstrap *@
+<div class="container mt-5">
+    @* Tarjeta principal con sombra ligera y sin bordes visibles *@
+    <div class="card shadow-sm border-0">
+        @* Cuerpo de la tarjeta con distribución flexible (responsive) para alinear texto y botón *@
+        <div class="card-body p-4 d-flex flex-column flex-md-row justify-content-between align-items-md-center gap-3">
+            
+            @* Bloque de información del usuario autenticado *@
+            <div>
+                @* Muestra el saludo personalizado con el nombre recuperado desde ViewBag *@
+                <h2 class="mb-1">¡Bienvenido de nuevo, @ViewBag.NombreUsuario!</h2>
+                @* Muestra el correo electrónico con el que se inició sesión *@
+                <p class="text-muted mb-0">Sesión iniciada como: <strong>@ViewBag.CorreoUsuario</strong></p>
+            </div>
+
+            @* Enlace con estilo de botón rojo que ejecuta la acción Logout en CuentaController para cerrar sesión *@
+            <a asp-controller="Cuenta" asp-action="Logout" class="btn btn-outline-danger">
+                Cerrar Sesión
+            </a>
+            
+        </div>
+    </div>
+</div>

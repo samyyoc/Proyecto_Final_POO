@@ -1,0 +1,57 @@
+@* Indica que esta vista está enlazada al modelo Usuario para capturar y validar las credenciales *@
+@model LoginMVC.Models.Usuario
+@{
+    // Define el título que se mostrará en la pestaña del navegador
+    ViewData["Title"] = "Iniciar Sesión";
+}
+
+@* Contenedor principal centrado con clases de Bootstrap para un diseño limpio y responsivo *@
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-5">
+            @* Tarjeta contenedora del formulario de inicio de sesión *@
+            <div class="card shadow-sm border-0">
+                <div class="card-body p-4">
+                    <h3 class="card-title text-center mb-4">Iniciar Sesión</h3>
+
+                    @* Muestra una alerta en rojo si el controlador envía un mensaje de error de autenticación *@
+                    @if (ViewBag.Error != null)
+                    {
+                        <div class="alert alert-danger" role="alert">
+                            @ViewBag.Error
+                        </div>
+                    }
+
+                    @* Formulario que envía los datos por POST a la acción Login de CuentaController *@
+                    <form asp-controller="Cuenta" asp-action="Login" method="post">
+                        @* Campo para el correo electrónico *@
+                        <div class="mb-3">
+                            <label asp-for="Correo" class="form-label">Correo electrónico</label>
+                            <input asp-for="Correo" class="form-control" placeholder="ejemplo@correo.com" />
+                            @* Muestra mensajes de validación si el correo está vacío o tiene formato inválido *@
+                            <span asp-validation-for="Correo" class="text-danger small"></span>
+                        </div>
+
+                        @* Campo para la contraseña *@
+                        <div class="mb-3">
+                            <label asp-for="Password" class="form-label">Contraseña</label>
+                            <input asp-for="Password" type="password" class="form-control" placeholder="Ingresa tu contraseña" />
+                            @* Muestra mensajes de validación si la contraseña está vacía *@
+                            <span asp-validation-for="Password" class="text-danger small"></span>
+                        </div>
+
+                        @* Botón para enviar el formulario *@
+                        <div class="d-grid mt-4">
+                            <button type="submit" class="btn btn-primary">Ingresar</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@* Carga los scripts de validación del lado del cliente definidos en el layout *@
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}
